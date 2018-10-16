@@ -26,7 +26,11 @@
         </foreach>
     </sql>
     <sql id="orderAll">
-
+        <if test="query.orders.size()>0">
+            <foreach collection="query.orders" open="order by" item="item" separator=",">
+                ${item.field} ${item.orderVal()}
+            </foreach>
+        </if>
     </sql>
 
     <select id="queryOne" resultMap="resultMap" parameterMap="paramMap">
@@ -41,6 +45,7 @@
         <include refid="fromAll"/>
         ) as temp
         <include refid="whereAll"/>
+        <include refid="orderAll"/>
     </select>
 
     <select id="queryPage" resultMap="resultMap" parameterMap="paramMap">
@@ -49,6 +54,7 @@
         <include refid="fromAll"/>
         ) as temp
         <include refid="whereAll"/>
+        <include refid="orderAll"/>
         limit ${query.page*query.pageSize},${query.pageSize}
     </select>
 

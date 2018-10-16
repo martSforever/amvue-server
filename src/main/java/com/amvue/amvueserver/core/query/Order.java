@@ -21,4 +21,7 @@ public class Order {
         this.desc = desc;
     }
 
+    public String orderVal() {
+        return this.desc ? "desc" : "asc";
+    }
 }

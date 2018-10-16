@@ -8,6 +8,15 @@ public class Query {
     private Integer pageSize;
 
     private List<Filter> filters = new ArrayList<>();
+    private List<Order> orders = new ArrayList<>();
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 
     public List<Filter> getFilters() {
         return filters;
