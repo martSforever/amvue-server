@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.amvue.amvueserver.business.acct.AcctMapper">
+
+    <parameterMap id="paramMap" type="com.amvue.amvueserver.business.acct.Acct"/>
+    <resultMap id="resultMap" type="com.amvue.amvueserver.business.acct.Acct"/>
+
+    <sql id="selectAll">
+        select
+            t1.id             as id,
+            t1.acct_code      as acctCode,
+            t1.birthday       as birthday,
+            t1.acct_type      as acctType,
+            t1.acct_agency_id as acctAgencyId,
+            t1.acct_name      as acctName
+    </sql>
+    <sql id="fromAll">
+        from acct t1
+    </sql>
+    <sql id="whereAll">
+        where 1=1
+    </sql>
+
+    <select id="queryOne" resultMap="resultMap" parameterMap="paramMap">
+        <include refid="selectAll"/>
+        <include refid="fromAll"/>
+        where t1.id = #{id}
+    </select>
+    <select id="queryAll" resultMap="resultMap" parameterMap="paramMap">
+        <include refid="selectAll"/>
+        <include refid="fromAll"/>
+        <include refid="whereAll"/>
+    </select>
+    <select id="queryPage" resultMap="resultMap" parameterMap="paramMap">
+        select * from (
+        <include refid="selectAll"/>
+        <include refid="fromAll"/>
+        <include refid="whereAll"/>
+        ) as temp
+        where 1=1
+        limit ${queryParam.page*queryParam.pageSize},${queryParam.pageSize}
+    </select>
+
+    <insert id="insert" parameterMap="paramMap">
+        insert into
+            acct
+            (id, acct_code, birthday, acct_type, acct_agency_id, acct_name)
+            value (#{id}, #{acctCode}, date_format(#{birthday}, '%Y-%m-%d'), #{acctType}, #{acctAgencyId}, #{acctName})
+    </insert>
+
+    <update id="update" parameterMap="paramMap">
+        update acct
+        <set>
+            <if test="id !=null and id !=''">id = #{id},</if>
+            <if test="acctCode!=null and acctCode!=''">acct_code = #{acctCode},</if>
+            <if test="birthday !=null and birthday !=''">birthday = #{birthday},</if>
+            <if test="acctType !=null and acctType !=''">acct_type = #{acctType},</if>
+            <if test="acctAgencyId !=null and acctAgencyId !=''">acct_agency_id = #{acctAgencyId},</if>
+            <if test="acctName !=null and acctName !=''">acct_name = #{acctName},</if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="delete" parameterMap="paramMap">
+        delete from acct
+        where id = #{id}
+    </delete>
+
+</mapper>
