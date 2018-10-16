@@ -3,18 +3,18 @@ package com.amvue.amvueserver.core.mybatis.util;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QueryParam {
+public class Query {
     private Integer page;
     private Integer pageSize;
 
-    private List<QueryFilter> queryFilters = new ArrayList<>();
+    private List<Filter> filters = new ArrayList<>();
 
-    public List<QueryFilter> getQueryFilters() {
-        return queryFilters;
+    public List<Filter> getFilters() {
+        return filters;
     }
 
-    public void setQueryFilters(List<QueryFilter> queryFilters) {
-        this.queryFilters = queryFilters;
+    public void setFilters(List<Filter> filters) {
+        this.filters = filters;
     }
 
     public Integer getPage() {

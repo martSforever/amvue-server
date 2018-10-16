@@ -1,6 +1,6 @@
 package com.amvue.amvueserver.core.mybatis.util;
 
-public class QueryFilter {
+public class Filter {
     private String field;
     private String value;
     private Boolean dateFormat = false;

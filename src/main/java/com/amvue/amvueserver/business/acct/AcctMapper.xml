@@ -21,9 +21,12 @@
         from acct t1
     </sql>
     <sql id="whereAll">
-        <foreach collection="queryParam.queryFilters" open="where 1=1 " item="item">
+        <foreach collection="query.filters" open="where 1=1 " item="item">
             ${item.getFilterSql()}
         </foreach>
+    </sql>
+    <sql id="orderAll">
+
     </sql>
 
     <select id="queryOne" resultMap="resultMap" parameterMap="paramMap">
@@ -46,7 +49,7 @@
         <include refid="fromAll"/>
         ) as temp
         <include refid="whereAll"/>
-        limit ${queryParam.page*queryParam.pageSize},${queryParam.pageSize}
+        limit ${query.page*query.pageSize},${query.pageSize}
     </select>
 
     <insert id="insert" parameterMap="paramMap">
