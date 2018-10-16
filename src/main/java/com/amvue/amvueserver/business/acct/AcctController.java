@@ -46,6 +46,16 @@ public class AcctController {
         }
     }
 
+    @PostMapping("queryCount")
+    public Map<String, Object> queryCount(@RequestBody Acct acct) {
+        try {
+            return ControllerUtils.success(acctService.queryCount(acct));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ControllerUtils.error(e);
+        }
+    }
+
     @PostMapping("insert")
     public Map<String, Object> insert(@RequestBody Acct acct) {
         try {

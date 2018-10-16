@@ -55,7 +55,15 @@
         ) as temp
         <include refid="whereAll"/>
         <include refid="orderAll"/>
-        limit ${query.page*query.pageSize},${query.pageSize}
+        limit ${(query.page-1)*query.pageSize},${query.pageSize}
+    </select>
+
+    <select id="queryCount" resultType="java.lang.Integer" parameterMap="paramMap">
+        select count(1) from (
+        <include refid="selectAll"/>
+        <include refid="fromAll"/>
+        ) as temp
+        <include refid="whereAll"/>
     </select>
 
     <insert id="insert" parameterMap="paramMap">

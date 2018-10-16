@@ -28,6 +28,11 @@ public class AcctServiceImpl implements AcctService {
     }
 
     @Override
+    public Integer queryCount(Acct acct) {
+        return acctMapper.queryCount(acct);
+    }
+
+    @Override
     public Integer insert(Acct acct) {
         return acctMapper.insert(acct);
     }

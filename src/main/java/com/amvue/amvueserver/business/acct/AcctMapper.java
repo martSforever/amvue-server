@@ -13,6 +13,8 @@ public interface AcctMapper {
 
     List<Acct> queryPage(Acct acct);
 
+    Integer queryCount(Acct acct);
+
     Integer insert(Acct acct);
 
     Integer update(Acct acct);
