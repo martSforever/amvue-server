@@ -1,7 +1,7 @@
 package com.amvue.amvueserver.business.acct;
 
 
-import com.amvue.amvueserver.core.mybatis.util.Query;
+import com.amvue.amvueserver.core.query.Query;
 
 public class Acct {
 

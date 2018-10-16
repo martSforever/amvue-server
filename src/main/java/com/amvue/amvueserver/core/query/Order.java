@@ -1,4 +1,4 @@
-package com.amvue.amvueserver.core.mybatis.util;
+package com.amvue.amvueserver.core.query;
 
 public class Order {
 
