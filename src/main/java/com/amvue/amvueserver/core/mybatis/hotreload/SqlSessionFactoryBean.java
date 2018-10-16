@@ -1,4 +1,4 @@
-package com.amvue.amvueserver.core.mybatis;
+package com.amvue.amvueserver.core.mybatis.hotreload;
 
 /**
  * Copyright 2010-2015 the original author or authors.

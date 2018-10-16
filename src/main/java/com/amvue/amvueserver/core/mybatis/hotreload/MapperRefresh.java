@@ -1,4 +1,4 @@
-package com.amvue.amvueserver.core.mybatis;
+package com.amvue.amvueserver.core.mybatis.hotreload;
 
 import java.io.File;
 import java.io.FileInputStream;
