@@ -1,7 +1,7 @@
 package com.amvue.amvueserver.business.acct;
 
 
-import com.amvue.amvueserver.core.QueryParam;
+import com.amvue.amvueserver.core.mybatis.util.QueryParam;
 
 public class Acct {
 
@@ -10,14 +10,23 @@ public class Acct {
     private String acctCode;
     private String birthday;
     private String acctType;
+    private String acctAge;
     private String acctAgencyId;
 
     private String acctAgency;
 
-    private QueryParam queryParam;
+    private QueryParam queryParam = new QueryParam();
 
     public QueryParam getQueryParam() {
         return queryParam;
+    }
+
+    public String getAcctAge() {
+        return acctAge;
+    }
+
+    public void setAcctAge(String acctAge) {
+        this.acctAge = acctAge;
     }
 
     public void setQueryParam(QueryParam queryParam) {

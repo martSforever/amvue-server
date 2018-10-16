@@ -14,13 +14,16 @@
             t1.birthday       as birthday,
             t1.acct_type      as acctType,
             t1.acct_agency_id as acctAgencyId,
-            t1.acct_name      as acctName
+            t1.acct_name      as acctName,
+            t1.acct_age       as acctAge
     </sql>
     <sql id="fromAll">
         from acct t1
     </sql>
     <sql id="whereAll">
-        where 1=1
+        <foreach collection="queryParam.queryFilters" open="where 1=1 " item="item">
+            ${item.getFilterSql()}
+        </foreach>
     </sql>
 
     <select id="queryOne" resultMap="resultMap" parameterMap="paramMap">
@@ -28,18 +31,21 @@
         <include refid="fromAll"/>
         where t1.id = #{id}
     </select>
+
     <select id="queryAll" resultMap="resultMap" parameterMap="paramMap">
+        select * from (
         <include refid="selectAll"/>
         <include refid="fromAll"/>
+        ) as temp
         <include refid="whereAll"/>
     </select>
+
     <select id="queryPage" resultMap="resultMap" parameterMap="paramMap">
         select * from (
         <include refid="selectAll"/>
         <include refid="fromAll"/>
-        <include refid="whereAll"/>
         ) as temp
-        where 1=1
+        <include refid="whereAll"/>
         limit ${queryParam.page*queryParam.pageSize},${queryParam.pageSize}
     </select>
 
