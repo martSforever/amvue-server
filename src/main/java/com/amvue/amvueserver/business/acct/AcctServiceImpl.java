@@ -19,7 +19,6 @@ public class AcctServiceImpl implements AcctService {
 
     @Override
     public List<Acct> queryAll(Acct acct) {
-        System.out.println("service query all");
         return acctMapper.queryAll(acct);
     }
 

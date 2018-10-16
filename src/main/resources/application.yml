@@ -7,6 +7,8 @@ mybatis:
         map-underscore-to-camel-case: true
         default-fetch-size: 100
         default-statement-timeout: 30
+    config-location: classpath:mybatis-config.xml
+    mapper-locations: classpath*:com/amvue/**/*Mapper.xml
 spring:
   datasource:
     url: jdbc:mysql://193.112.75.134:4002/amvue

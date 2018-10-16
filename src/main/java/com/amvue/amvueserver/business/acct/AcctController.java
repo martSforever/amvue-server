@@ -39,7 +39,6 @@ public class AcctController {
     @PostMapping("queryAll")
     public Map<String, Object> queryAll(@RequestBody Acct acct) {
         try {
-            System.out.println("controller query all");
             return ControllerUtils.success(acctService.queryAll(acct));
         } catch (Exception e) {
             e.printStackTrace();
