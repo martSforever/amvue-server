@@ -1,6 +1,7 @@
 package com.amvue.amvueserver.business.acct;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -38,12 +39,40 @@ public class AcctServiceImpl implements AcctService {
     }
 
     @Override
+    @Transactional
+    public Integer multiInsert(List<Acct> accts) {
+        Integer count = 0;
+        for (Acct acct : accts) {
+            count += acctMapper.insert(acct);
+        }
+        return count;
+    }
+
+    @Override
     public Integer update(Acct acct) {
         return acctMapper.update(acct);
     }
 
     @Override
+    public Integer multiUpdate(List<Acct> accts) {
+        Integer count = 0;
+        for (Acct acct : accts) {
+            count += acctMapper.update(acct);
+        }
+        return count;
+    }
+
+    @Override
     public Integer delete(Acct acct) {
         return acctMapper.delete(acct);
+    }
+
+    @Override
+    public Integer multiDelete(List<Acct> accts) {
+        Integer count = 0;
+        for (Acct acct : accts) {
+            count += acctMapper.delete(acct);
+        }
+        return count;
     }
 }

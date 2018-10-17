@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -66,6 +67,16 @@ public class AcctController {
         }
     }
 
+    @PostMapping("multiInsert")
+    public Map<String, Object> multiInsert(@RequestBody List<Acct> accts) {
+        try {
+            return ControllerUtils.success(acctService.multiInsert(accts));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ControllerUtils.error(e);
+        }
+    }
+
     @PostMapping("update")
     public Map<String, Object> update(@RequestBody Acct acct) {
         try {
@@ -76,10 +87,30 @@ public class AcctController {
         }
     }
 
+    @PostMapping("multiUpdate")
+    public Map<String, Object> multiUpdate(@RequestBody List<Acct> accts) {
+        try {
+            return ControllerUtils.success(acctService.multiUpdate(accts));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ControllerUtils.error(e);
+        }
+    }
+
     @PostMapping("delete")
     public Map<String, Object> delete(@RequestBody Acct acct) {
         try {
             return ControllerUtils.success(acctService.delete(acct));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ControllerUtils.error(e);
+        }
+    }
+
+    @PostMapping("multiDelete")
+    public Map<String, Object> multiDelete(@RequestBody List<Acct> accts) {
+        try {
+            return ControllerUtils.success(acctService.multiDelete(accts));
         } catch (Exception e) {
             e.printStackTrace();
             return ControllerUtils.error(e);

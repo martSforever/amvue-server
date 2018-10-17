@@ -13,7 +13,13 @@ public interface AcctService {
 
     Integer insert(Acct acct);
 
+    Integer multiInsert(List<Acct> accts);
+
     Integer update(Acct acct);
 
+    Integer multiUpdate(List<Acct> accts);
+
     Integer delete(Acct acct);
+
+    Integer multiDelete(List<Acct> accts);
 }
