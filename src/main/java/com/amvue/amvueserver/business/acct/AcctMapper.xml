@@ -9,13 +9,15 @@
 
     <sql id="selectAll">
         select
-            t1.id             as id,
-            t1.acct_code      as acctCode,
-            t1.birthday       as birthday,
-            t1.acct_type      as acctType,
-            t1.acct_agency_id as acctAgencyId,
-            t1.acct_name      as acctName,
-            t1.acct_age       as acctAge
+            t1.id                                           as id,
+            date_format(t1.created_at, '%Y-%m-%d %H:%i:%S') as createdAt,
+            date_format(t1.updated_at, '%Y-%m-%d %H:%i:%S') as updatedAt,
+            t1.acct_code                                    as acctCode,
+            date_format(t1.birthday, '%Y-%m-%d %H:%i:%S')   as birthday,
+            t1.acct_type                                    as acctType,
+            t1.acct_agency_id                               as acctAgencyId,
+            t1.acct_name                                    as acctName,
+            t1.acct_age                                     as acctAge
     </sql>
     <sql id="fromAll">
         from acct t1
@@ -26,11 +28,11 @@
         </foreach>
     </sql>
     <sql id="orderAll">
-        <if test="query.orders.size()>0">
-            <foreach collection="query.orders" open="order by" item="item" separator=",">
-                ${item.field} ${item.orderVal()}
-            </foreach>
-        </if>
+        <!--<if test="query.orders.size()>0">-->
+        <foreach collection="query.orders" open="order by" item="item" separator=",">
+            ${item.field} ${item.orderVal()}
+        </foreach>
+        <!--</if>-->
     </sql>
 
     <select id="queryOne" resultMap="resultMap" parameterMap="paramMap">
@@ -69,13 +71,16 @@
     <insert id="insert" parameterMap="paramMap">
         insert into
             acct
-            (id, acct_code, birthday, acct_type, acct_agency_id, acct_name)
-            value (#{id}, #{acctCode}, date_format(#{birthday}, '%Y-%m-%d'), #{acctType}, #{acctAgencyId}, #{acctName})
+            (id, created_at, updated_at, acct_code, birthday, acct_type, acct_agency_id, acct_name)
+            value
+            (#{id}, now(), now(), #{acctCode}, date_format(#{birthday}, '%Y-%m-%d'), #{acctType},
+             #{acctAgencyId}, #{acctName})
     </insert>
 
     <update id="update" parameterMap="paramMap">
         update acct
         <set>
+            updated_at = now(),
             <if test="id !=null and id !=''">id = #{id},</if>
             <if test="acctCode!=null and acctCode!=''">acct_code = #{acctCode},</if>
             <if test="birthday !=null and birthday !=''">birthday = #{birthday},</if>

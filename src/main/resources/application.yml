@@ -12,7 +12,7 @@ server:
   port: 80
 spring:
   datasource:
-    url: jdbc:mysql://193.112.75.134:4002/amvue
+    url: jdbc:mysql://193.112.75.134:4002/amvue?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true
     username: root
     password: abc123456
     type: com.alibaba.druid.pool.DruidDataSource
