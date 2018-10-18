@@ -7,11 +7,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 import java.util.Map;
 
-public class BasicController<T extends BasicModel> {
+public abstract class BasicController<T extends BasicModel> {
 
-    public BasicService<T> getBasicService() throws Exception {
-        throw new Exception("获取Basic Service 失败，请确认程序代码是否正确！");
-    }
+    public abstract BasicService<T> getBasicService() throws Exception;
 
     @PostMapping("queryOne")
     public Map<String, Object> queryOne(@RequestBody T t) {

@@ -4,7 +4,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public class BasicServiceImpl<T extends BasicModel> implements BasicService<T> {
+public abstract class BasicServiceImpl<T> implements BasicService<T> {
 
     public T queryOne(T t) throws Exception {
         return (T) basicMapper().queryOne(t);
@@ -59,7 +59,5 @@ public class BasicServiceImpl<T extends BasicModel> implements BasicService<T> {
         return count;
     }
 
-    public BasicMapper<T> basicMapper() throws Exception {
-        throw new Exception("获取Basic Mapper 失败，请确认程序是否正确！");
-    }
+    public abstract BasicMapper<T> basicMapper() throws Exception;
 }

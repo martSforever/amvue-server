@@ -1,11 +1,12 @@
 package com.amvue.amvueserver.business.acct;
 
+import com.amvue.amvueserver.core.basic.BasicMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 @Mapper
-public interface AcctMapper {
+public interface AcctMapper extends BasicMapper<Acct> {
 
     Acct queryOne(Acct acct);
 

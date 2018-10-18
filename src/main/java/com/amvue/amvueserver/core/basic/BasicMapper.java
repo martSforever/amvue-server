@@ -2,7 +2,7 @@ package com.amvue.amvueserver.core.basic;
 
 import java.util.List;
 
-public interface BasicMapper<T extends BasicModel> {
+public interface BasicMapper<T> {
 
     T queryOne(T t);
 

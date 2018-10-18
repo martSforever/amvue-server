@@ -2,7 +2,7 @@ package com.amvue.amvueserver.core.basic;
 
 import java.util.List;
 
-public interface BasicService<T extends BasicModel> {
+public interface BasicService<T> {
 
     T queryOne(T t) throws Exception;
 

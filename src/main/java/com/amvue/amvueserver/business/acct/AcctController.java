@@ -1,6 +1,8 @@
 package com.amvue.amvueserver.business.acct;
 
 import com.amvue.amvueserver.core.ControllerUtils;
+import com.amvue.amvueserver.core.basic.BasicController;
+import com.amvue.amvueserver.core.basic.BasicService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,109 +14,14 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("acct")
-public class AcctController {
+public class AcctController extends BasicController<Acct> {
 
     @Resource
     private AcctService acctService;
 
-    @PostMapping("queryOne")
-    public Map<String, Object> queryOne(@RequestBody Acct acct) {
-        try {
-            return ControllerUtils.success(acctService.queryOne(acct));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ControllerUtils.error(e);
-        }
-    }
 
-    @PostMapping("queryPage")
-    public Map<String, Object> queryPage(@RequestBody Acct acct) {
-        try {
-            return ControllerUtils.success(acctService.queryPage(acct));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ControllerUtils.error(e);
-        }
+    @Override
+    public BasicService<Acct> getBasicService() throws Exception {
+        return acctService;
     }
-
-    @PostMapping("queryAll")
-    public Map<String, Object> queryAll(@RequestBody Acct acct) {
-        try {
-            return ControllerUtils.success(acctService.queryAll(acct));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ControllerUtils.error(e);
-        }
-    }
-
-    @PostMapping("queryCount")
-    public Map<String, Object> queryCount(@RequestBody Acct acct) {
-        try {
-            return ControllerUtils.success(acctService.queryCount(acct));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ControllerUtils.error(e);
-        }
-    }
-
-    @PostMapping("insert")
-    public Map<String, Object> insert(@RequestBody Acct acct) {
-        try {
-            return ControllerUtils.success(acctService.insert(acct));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ControllerUtils.error(e);
-        }
-    }
-
-    @PostMapping("multiInsert")
-    public Map<String, Object> multiInsert(@RequestBody List<Acct> accts) {
-        try {
-            return ControllerUtils.success(acctService.multiInsert(accts));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ControllerUtils.error(e);
-        }
-    }
-
-    @PostMapping("update")
-    public Map<String, Object> update(@RequestBody Acct acct) {
-        try {
-            return ControllerUtils.success(acctService.update(acct));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ControllerUtils.error(e);
-        }
-    }
-
-    @PostMapping("multiUpdate")
-    public Map<String, Object> multiUpdate(@RequestBody List<Acct> accts) {
-        try {
-            return ControllerUtils.success(acctService.multiUpdate(accts));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ControllerUtils.error(e);
-        }
-    }
-
-    @PostMapping("delete")
-    public Map<String, Object> delete(@RequestBody Acct acct) {
-        try {
-            return ControllerUtils.success(acctService.delete(acct));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ControllerUtils.error(e);
-        }
-    }
-
-    @PostMapping("multiDelete")
-    public Map<String, Object> multiDelete(@RequestBody List<Acct> accts) {
-        try {
-            return ControllerUtils.success(acctService.multiDelete(accts));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ControllerUtils.error(e);
-        }
-    }
-
 }

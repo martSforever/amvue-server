@@ -1,13 +1,10 @@
 package com.amvue.amvueserver.business.acct;
 
 
+import com.amvue.amvueserver.core.basic.BasicModel;
 import com.amvue.amvueserver.core.query.Query;
 
-public class Acct {
-
-    private int id;
-    private String createdAt;
-    private String updatedAt;
+public class Acct extends BasicModel {
 
     private String acctName;
     private String acctCode;
@@ -17,22 +14,6 @@ public class Acct {
     private String acctAgencyId;
 
     private String acctAgency;
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 
     private Query query = new Query();
 
@@ -52,13 +33,6 @@ public class Acct {
         this.query = query;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getAcctAgencyId() {
         return acctAgencyId;
