@@ -15,12 +15,6 @@ public class Acct extends BasicModel {
 
     private String acctAgency;
 
-    private Query query = new Query();
-
-    public Query getQuery() {
-        return query;
-    }
-
     public String getAcctAge() {
         return acctAge;
     }
@@ -28,11 +22,6 @@ public class Acct extends BasicModel {
     public void setAcctAge(String acctAge) {
         this.acctAge = acctAge;
     }
-
-    public void setQuery(Query query) {
-        this.query = query;
-    }
-
 
     public String getAcctAgencyId() {
         return acctAgencyId;

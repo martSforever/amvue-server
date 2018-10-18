@@ -1,9 +1,20 @@
 package com.amvue.amvueserver.core.basic;
 
+import com.amvue.amvueserver.core.query.Query;
+
 public class BasicModel {
     private int id;
     private String createdAt;
     private String updatedAt;
+    private Query query = new Query();
+
+    public Query getQuery() {
+        return query;
+    }
+
+    public void setQuery(Query query) {
+        this.query = query;
+    }
 
     public int getId() {
         return id;
