@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.amvue.amvueserver.business.lov.LovMapper">
+
+    <parameterMap id="paramMap" type="com.amvue.amvueserver.business.lov.Lov"/>
+    <resultMap id="resultMap" type="com.amvue.amvueserver.business.lov.Lov"/>
+
+    <sql id="selectAll">
+        select
+            t1.id                                           as id,
+            date_format(t1.created_at, '%Y-%m-%d %H:%i:%S') as createdAt,
+            date_format(t1.updated_at, '%Y-%m-%d %H:%i:%S') as updatedAt,
+            t1.label                                        as label,
+            t1.code                                         as code,
+            t1.type                                         as type
+    </sql>
+    <sql id="fromAll">
+        from lov t1
+    </sql>
+    <sql id="whereAll">
+        <foreach collection="query.filters" open="where 1=1 " item="item">
+            ${item.getFilterSql()}
+        </foreach>
+    </sql>
+    <sql id="orderAll">
+        <!--<if test="query.orders.size()>0">-->
+        <foreach collection="query.orders" open="order by" item="item" separator=",">
+            ${item.field} ${item.orderVal()}
+        </foreach>
+        <!--</if>-->
+    </sql>
+
+    <select id="queryOne" resultMap="resultMap" parameterMap="paramMap">
+        <include refid="selectAll"/>
+        <include refid="fromAll"/>
+        where t1.id = #{id}
+    </select>
+
+    <select id="queryAll" resultMap="resultMap" parameterMap="paramMap">
+        select * from (
+        <include refid="selectAll"/>
+        <include refid="fromAll"/>
+        ) as temp
+        <include refid="whereAll"/>
+        <include refid="orderAll"/>
+    </select>
+
+    <select id="queryPage" resultMap="resultMap" parameterMap="paramMap">
+        select * from (
+        <include refid="selectAll"/>
+        <include refid="fromAll"/>
+        ) as temp
+        <include refid="whereAll"/>
+        <include refid="orderAll"/>
+        limit ${(query.page-1)*query.pageSize},${query.pageSize}
+    </select>
+
+    <select id="queryCount" resultType="java.lang.Integer" parameterMap="paramMap">
+        select count(1) from (
+        <include refid="selectAll"/>
+        <include refid="fromAll"/>
+        ) as temp
+        <include refid="whereAll"/>
+    </select>
+
+    <insert id="insert" parameterMap="paramMap">
+        insert into
+            lov
+            (id, created_at, updated_at, label, code, type)
+            value
+            (#{id}, now(), now(), #{label}, #{code}, #{type})
+    </insert>
+
+    <update id="update" parameterMap="paramMap">
+        update lov
+        <set>
+            updated_at = now(),
+            <if test="id !=null and id !=''">id = #{id},</if>
+            <if test="label !=null and label !=''">label = #{label},</if>
+            <if test="code !=null and code !=''">code = #{code},</if>
+            <if test="type !=null and type !=''">type = #{type},</if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="delete" parameterMap="paramMap">
+        delete from lov
+        where id = #{id}
+    </delete>
+
+</mapper>

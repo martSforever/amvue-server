@@ -1,37 +1,12 @@
 package com.amvue.amvueserver.business.lov;
 
-public class Lov {
-    private int id;
-    private String createdAt;
-    private String updatedAt;
+import com.amvue.amvueserver.core.basic.BasicModel;
+
+public class Lov extends BasicModel {
 
     private String label;
     private String code;
     private String type;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 
     public String getLabel() {
         return label;
