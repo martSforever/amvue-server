@@ -48,9 +48,9 @@ public class Filter {
 
     public String filterValue() {
         switch (this.operator) {
-            case "=null":
+            case "=#":
                 return " IS NULL ";
-            case "!=null":
+            case "!=#":
                 return " IS NOT NULL ";
             case "~":
                 return " LIKE '%" + this.value + "%'";
