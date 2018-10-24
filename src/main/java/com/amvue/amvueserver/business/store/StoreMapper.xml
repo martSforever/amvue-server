@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.amvue.amvueserver.business.agency.AgencyMapper">
+<mapper namespace="com.amvue.amvueserver.business.store.StoreMapper">
 
-    <parameterMap id="paramMap" type="com.amvue.amvueserver.business.agency.Agency"/>
-    <resultMap id="resultMap" type="com.amvue.amvueserver.business.agency.Agency"/>
+    <parameterMap id="paramMap" type="com.amvue.amvueserver.business.store.Store"/>
+    <resultMap id="resultMap" type="com.amvue.amvueserver.business.store.Store"/>
 
     <sql id="selectAll">
         select
@@ -13,16 +13,18 @@
             date_format(t1.created_at, '%Y-%m-%d %H:%i:%S') as createdAt,
             date_format(t1.updated_at, '%Y-%m-%d %H:%i:%S') as updatedAt,
 
-            name                                            as name,
-            type                                            as type,
-            level                                           as level,
-            charger_id                                       as chargerId,
+            t1.name                                         as name,
+            t1.type                                         as type,
+            t1.code                                         as code,
+            t1.charger_id                                   as chargerId,
 
-            t2.acct_name                                    as chargerName
+            t2.name                                         as agencyName,
+            t3.acct_name                                    as chargerName
     </sql>
     <sql id="fromAll">
-        from agency t1
-        left join acct t2 on t1.chargerId = t2.id
+        from store t1
+        left join agency t2 on t1.agency_id = t2.id
+        left join acct t3 on t1.charger_id = t3.id
     </sql>
     <sql id="whereAll">
         <foreach collection="query.filters" open="where 1=1 " item="item">
@@ -72,25 +74,26 @@
 
     <insert id="insert" parameterMap="paramMap">
         insert into
-            agency
-            (id, created_at, updated_at, type, name, level, charger_id)
+            store
+            (id, created_at, updated_at, name, type, code, charger_id, agency_id)
             value
-            (#{id}, now(), now(), #{type}, #{name}, #{level}, #{chargerId})
+            (#{id},now(),now(),#{name},#{type},#{code},#{chargerId},#{agencyId})
     </insert>
 
     <update id="update" parameterMap="paramMap">
-        update agency
+        update store
         <set>
             updated_at = now(),
             <if test="type!=null and type!=''">type = #{type},</if>
             <if test="name!=null and name!=''">name = #{name},</if>
-            <if test="level!=null and level!=''">level = #{level},</if>
-            <if test="chargerId!=null and chargerId!=''">charger_id = #{chargerId},</if>
+            <if test="code!=null and code!=''">code = #{code},</if>
+            <if test="chargerId!=null and chargerId!=''">chargerId = #{chargerId},</if>
+            <if test="agencyId!=null and agencyId!=''">name = #{agencyId},</if>
         </set>
         where id = #{id}
     </update>
     <delete id="delete" parameterMap="paramMap">
-        delete from agency
+        delete from store
         where id = #{id}
     </delete>
 
