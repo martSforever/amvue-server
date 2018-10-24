@@ -2,25 +2,27 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.amvue.amvueserver.business.acct.AcctMapper">
+<mapper namespace="com.amvue.amvueserver.business.agency.AgencyMapper">
 
-    <parameterMap id="paramMap" type="com.amvue.amvueserver.business.acct.Acct"/>
-    <resultMap id="resultMap" type="com.amvue.amvueserver.business.acct.Acct"/>
+    <parameterMap id="paramMap" type="com.amvue.amvueserver.business.agency.Agency"/>
+    <resultMap id="resultMap" type="com.amvue.amvueserver.business.agency.Agency"/>
 
     <sql id="selectAll">
         select
             t1.id                                           as id,
             date_format(t1.created_at, '%Y-%m-%d %H:%i:%S') as createdAt,
             date_format(t1.updated_at, '%Y-%m-%d %H:%i:%S') as updatedAt,
-            t1.acct_code                                    as acctCode,
-            date_format(t1.birthday, '%Y-%m-%d %H:%i:%S')   as birthday,
-            t1.acct_type                                    as acctType,
-            t1.acct_agency_id                               as acctAgencyId,
-            t1.acct_name                                    as acctName,
-            t1.acct_age                                     as acctAge
+
+            name                                            as name,
+            type                                            as type,
+            level                                           as level,
+            chargerId                                       as chargerId,
+
+            t2.acct_name                                    as chargerName
     </sql>
     <sql id="fromAll">
-        from acct t1
+        from agency t1
+        left join acct t2 on t1.chargerId = t2.id
     </sql>
     <sql id="whereAll">
         <foreach collection="query.filters" open="where 1=1 " item="item">
@@ -70,27 +72,25 @@
 
     <insert id="insert" parameterMap="paramMap">
         insert into
-            acct
-            (id, created_at, updated_at, acct_code, birthday, acct_type, acct_agency_id, acct_name)
+            agency
+            (id, created_at, updated_at, type, name, level, chargerId)
             value
-            (#{id}, now(), now(), #{acctCode}, date_format(#{birthday}, '%Y-%m-%d'), #{acctType},
-             #{acctAgencyId}, #{acctName})
+            (#{id}, now(), now(), #{type}, #{name}, #{level}, #{chargerId}}})
     </insert>
 
     <update id="update" parameterMap="paramMap">
-        update acct
+        update agency
         <set>
             updated_at = now(),
-            <if test="acctCode!=null and acctCode!=''">acct_code = #{acctCode},</if>
-            <if test="birthday !=null and birthday !=''">birthday = #{birthday},</if>
-            <if test="acctType !=null and acctType !=''">acct_type = #{acctType},</if>
-            <if test="acctAgencyId !=null and acctAgencyId !=''">acct_agency_id = #{acctAgencyId},</if>
-            <if test="acctName !=null and acctName !=''">acct_name = #{acctName},</if>
+            <if test="type!=null and type!=''">type = #{type},</if>
+            <if test="name!=null and name!=''">name = #{name},</if>
+            <if test="level!=null and level!=''">level = #{level},</if>
+            <if test="chargerId!=null and chargerId!=''">chargerId = #{chargerId},</if>
         </set>
         where id = #{id}
     </update>
     <delete id="delete" parameterMap="paramMap">
-        delete from acct
+        delete from agency
         where id = #{id}
     </delete>
 

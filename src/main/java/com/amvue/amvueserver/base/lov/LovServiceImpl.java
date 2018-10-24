@@ -1,4 +1,4 @@
-package com.amvue.amvueserver.business.lov;
+package com.amvue.amvueserver.base.lov;
 
 import com.amvue.amvueserver.core.basic.BasicMapper;
 import com.amvue.amvueserver.core.basic.BasicServiceImpl;
