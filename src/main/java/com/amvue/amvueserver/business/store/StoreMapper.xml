@@ -18,12 +18,12 @@
             t1.code                                         as code,
             t1.charger_id                                   as chargerId,
 
-            t2.name                                         as agencyName,
+            t2.acct_name                                         as agencyName,
             t3.acct_name                                    as chargerName
     </sql>
     <sql id="fromAll">
         from store t1
-        left join agency t2 on t1.agency_id = t2.id
+        left join acct t2 on t1.agency_id = t2.id
         left join acct t3 on t1.charger_id = t3.id
     </sql>
     <sql id="whereAll">
@@ -77,7 +77,7 @@
             store
             (id, created_at, updated_at, name, type, code, charger_id, agency_id)
             value
-            (#{id},now(),now(),#{name},#{type},#{code},#{chargerId},#{agencyId})
+            (#{id}, now(), now(), #{name}, #{type}, #{code}, #{chargerId}, #{agencyId})
     </insert>
 
     <update id="update" parameterMap="paramMap">
@@ -87,8 +87,8 @@
             <if test="type!=null and type!=''">type = #{type},</if>
             <if test="name!=null and name!=''">name = #{name},</if>
             <if test="code!=null and code!=''">code = #{code},</if>
-            <if test="chargerId!=null and chargerId!=''">chargerId = #{chargerId},</if>
-            <if test="agencyId!=null and agencyId!=''">name = #{agencyId},</if>
+            <if test="chargerId!=null and chargerId!=''">charger_id = #{chargerId},</if>
+            <if test="agencyId!=null and agencyId!=''">agency_id = #{agencyId},</if>
         </set>
         where id = #{id}
     </update>
