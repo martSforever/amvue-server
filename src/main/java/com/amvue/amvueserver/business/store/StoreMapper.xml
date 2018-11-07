@@ -18,7 +18,7 @@
             t1.code                                         as code,
             t1.charger_id                                   as chargerId,
 
-            t2.acct_name                                         as agencyName,
+            t2.acct_name                                    as agencyName,
             t3.acct_name                                    as chargerName
     </sql>
     <sql id="fromAll">
